@@ -63,6 +63,23 @@ std::vector<json11::Json> load_json_vec_from_file(const std::string& file_name) 
     return json_vec;
 }
 
+std::vector<json11::Json> load_json_vec_from_input() {
+    std::vector<json11::Json> json_vec;
+    // std::ifstream ifs(file_name);
+    std::string str;
+    // if (ifs.fail()) {
+    //     std::cerr << "error:load_json_vec_from_file " + file_name << std::endl;
+    //     assert(false);
+    // }
+    while (getline(std::cin, str)) {
+        std::string err;
+        json11::Json json_elem = json11::Json::parse(str, err);
+        json_vec.push_back(json_elem);
+    }
+    // ifs.close();
+    return json_vec;
+}
+
 void dump_json_to_file(const json11::Json& json, const std::string& file_name) {
     std::ofstream outputfile(file_name);
     outputfile << json.dump() << std::endl;

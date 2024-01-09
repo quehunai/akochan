@@ -80,6 +80,7 @@ std::vector<std::string> str_split(const std::string& str, const char del);
 bool check_openable_file(const std::string& file_name);
 json11::Json load_json_from_file(const std::string& file_name);
 std::vector<json11::Json> load_json_vec_from_file(const std::string& file_name);
+std::vector<json11::Json> load_json_vec_from_input();
 void dump_json_to_file(const json11::Json& json, const std::string& file_name);
 void dump_json_vec_to_file(const std::vector<json11::Json>& json_vec, const std::string& file_name);
 std::string json_vec_to_str(const std::vector<json11::Json>& json_vec);

@@ -345,6 +345,21 @@ int main(int argc,char* argv[]) {
             tcp_client.SendCommand(response.dump() + "\n");
         }
         return 0;
+    } else if (argc >= 3 && strcmp(argv[1], "mjai_stdin") == 0) {
+        const json11::Json& setup_mjai_json = load_json_from_file("setup_mjai.json");
+        set_tactics_one(setup_mjai_json);
+        // std::string file_name = argv[2];
+        int id = std::atoi(argv[2]);
+        // const int length = (5 <= argc) ? std::atoi(argv[4]) + 1 : -1;
+        const Moves game_record = load_game_record_from_file("stdin", -1);
+        // for (const auto& action : game_record) {
+        //     std::cout << action.dump() << std::endl;
+        // }
+        // std::cout << "calculating review" << std::endl;
+        auto review = ai_review(game_record, id);
+        std::cout << review[0]["moves"].dump() << std::endl;
+        return 0;
+
     } else {
         usage();
     }

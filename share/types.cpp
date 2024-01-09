@@ -859,7 +859,12 @@ std::array<bool, 38> get_furiten_flags(const Moves& game_record, const Game_Stat
 }
 
 std::vector<json11::Json> load_game_record_from_file(const std::string& file_name, int length) {
-    const Moves json_vec = load_json_vec_from_file(file_name);
+    Moves json_vec;
+    if (file_name == "stdin") {
+        json_vec = load_json_vec_from_input();
+    } else {
+        json_vec = load_json_vec_from_file(file_name);
+    }
     assert_with_out(length <= int(json_vec.size()), "load_game_record_from_file: length error");
     if (length < 0) {
         length = json_vec.size();
